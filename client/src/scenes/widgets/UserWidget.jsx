@@ -22,7 +22,7 @@ import {
     const main = palette.neutral.main;
   
     const getUser = async () => {
-      const response = await fetch(`/users/${userId}`, {
+      const response = await fetch(`https://social-media-server-6joo.onrender.com/users/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -54,7 +54,7 @@ import {
         <FlexBetween
           gap="0.5rem"
           pb="1.1rem"
-          onClick={() => navigate(`/profile/${userId}`)}
+          onClick={() => navigate(`https://social-media-server-6joo.onrender.com/profile/${userId}`)}
         >
           <FlexBetween gap="1rem">
             <UserImage image={picturePath} />

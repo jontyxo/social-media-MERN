@@ -109,7 +109,7 @@ const Form = () => {
       const photoid=res.data.public_id.split("/")[1];
       console.log(photoid);
       newUser.picturePath=photoid;
-        const savedUserResponse=await axios.post("/auth/register",newUser);
+        const savedUserResponse=await axios.post("https://social-media-server-6joo.onrender.com/auth/register",newUser);
         
           onSubmitProps.resetForm();
       

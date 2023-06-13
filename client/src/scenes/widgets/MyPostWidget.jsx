@@ -52,7 +52,7 @@ import {
        formData.append("picturePath",photoid)
       }
   
-      const response = await fetch(`/posts`, {
+      const response = await fetch(`https://social-media-server-6joo.onrender.com/posts`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
