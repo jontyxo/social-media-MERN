@@ -54,7 +54,7 @@ import {
         <FlexBetween
           gap="0.5rem"
           pb="1.1rem"
-          onClick={() => navigate(`https://social-media-server-6joo.onrender.com/profile/${userId}`)}
+          onClick={() => navigate(`/profile/${userId}`)}
         >
           <FlexBetween gap="1rem">
             <UserImage image={picturePath} />
