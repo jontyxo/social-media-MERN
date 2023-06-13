@@ -120,11 +120,11 @@ const Form = () => {
   }
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("https://social-media-server-6joo.onrender.com/auth/login", {
+    const loggedInResponse = await fetch("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
-    }); 
+    });
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
