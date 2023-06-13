@@ -46,7 +46,7 @@ import {
       if (file) {
         const formDataImage=new FormData();      
         formDataImage.append("file",file)
-        formDataImage.append("upload_preset","urde6fpz")
+        formDataImage.append("upload_preset","upsjg6yy")
         const res=  await axios.post("https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",formDataImage)   
         const photoid=res.data.public_id.split("/")[1];
        formData.append("picturePath",photoid)
