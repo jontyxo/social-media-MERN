@@ -48,6 +48,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [file,setFile]=useState(null);
+  const [isFetching,setIsFetching] = useState(false)
   const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
   const dispatch = useDispatch();
@@ -120,22 +121,33 @@ const Form = () => {
   }
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("https://social-media-server-6joo.onrender.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    const loggedIn = await loggedInResponse.json();
-    onSubmitProps.resetForm();
-    if (loggedIn) {
-      dispatch(
-        setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
-        })
-      );
-      navigate("/home");
+    setIsFetching(true);
+    try{
+
+      const loggedInResponse = await fetch("https://social-media-server-6joo.onrender.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const loggedIn = await loggedInResponse.json();
+      onSubmitProps.resetForm();
+      if (loggedIn) {
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token: loggedIn.token,
+          })
+        );
+        
+      
+        navigate("/home");
+      }
     }
+    catch(err){
+    setIsFetching(true);
+
+    }
+  
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -291,7 +303,9 @@ const Form = () => {
           <Box>
             <Button
               fullWidth
-              type="submit"
+
+              disabled={isFetching} 
+                           type="submit"
               sx={{
                 m: "2rem 0",
                 p: "1rem",

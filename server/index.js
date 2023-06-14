@@ -65,7 +65,9 @@ mongoose
   .catch((err) => console.log(err));
 
 
-
+  app.get('/api/check-server-status', (req, res) => {
+    res.sendStatus(200); // Server is running
+  });
 
 
   app.listen("5000", () => {
