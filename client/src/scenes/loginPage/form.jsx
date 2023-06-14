@@ -93,24 +93,32 @@ const Form = () => {
   // };
 
   const register=async(values,onSubmitProps) =>{
-    const newUser={
-      firstName:values.firstName,
-      lastName:values.lastName,
-      email:values.email,
-      password:values.password,
-      location:values.location,
-      occupation:values.occupation
+    setIsFetching(true);
+    try{
 
+      const newUser={
+        firstName:values.firstName,
+        lastName:values.lastName,
+        email:values.email,
+        password:values.password,
+        location:values.location,
+        occupation:values.occupation
+  
+      }
+      
+      const formData=new FormData();      
+        formData.append("file",file)
+        formData.append("upload_preset","upsjg6yy")
+        const res=  await axios.post("https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",formData)   
+        const photoid=res.data.public_id.split("/")[1];
+        console.log(photoid);
+        newUser.picturePath=photoid;
+          const savedUserResponse=await axios.post("https://social-media-server-6joo.onrender.com/auth/register",newUser);
+    }catch(err){
+      setIsFetching(false);
     }
     
-    const formData=new FormData();      
-      formData.append("file",file)
-      formData.append("upload_preset","upsjg6yy")
-      const res=  await axios.post("https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",formData)   
-      const photoid=res.data.public_id.split("/")[1];
-      console.log(photoid);
-      newUser.picturePath=photoid;
-        const savedUserResponse=await axios.post("https://social-media-server-6joo.onrender.com/auth/register",newUser);
+        setIsFetching(false);
         
           onSubmitProps.resetForm();
       

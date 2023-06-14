@@ -18,7 +18,6 @@ import {
     useMediaQuery,
   } from "@mui/material";
   import FlexBetween from "../../components/FlexBetween";
-  import Dropzone from "react-dropzone";
   import UserImage from "../../components/UserImage";
   import WidgetWrapper from "../../components/WidgetWrapper";
   import { useState } from "react";
@@ -27,6 +26,7 @@ import {
   import axios from "axios"
   
   const MyPostWidget = ({ picturePath }) => {
+    const [isFetching,setIsFetching]=useState(false);
     const dispatch = useDispatch();
     const [isImage, setIsImage] = useState(false);
     const[file,setFile]=useState("")
@@ -40,27 +40,34 @@ import {
     const medium = palette.neutral.medium;
   
     const handlePost = async () => {
-      const formData = new FormData();
-      formData.append("userId", _id);
-      formData.append("description", post);
-      if (file) {
-        const formDataImage=new FormData();      
-        formDataImage.append("file",file)
-        formDataImage.append("upload_preset","upsjg6yy")
-        const res=  await axios.post("https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",formDataImage)   
-        const photoid=res.data.public_id.split("/")[1];
-       formData.append("picturePath",photoid)
+      setIsFetching(true);
+      try{
+
+        const formData = new FormData();
+        formData.append("userId", _id);
+        formData.append("description", post);
+        if (file) {
+          const formDataImage=new FormData();      
+          formDataImage.append("file",file)
+          formDataImage.append("upload_preset","upsjg6yy")
+          const res=  await axios.post("https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",formDataImage)   
+          const photoid=res.data.public_id.split("/")[1];
+          formData.append("picturePath",photoid)
+        }
+        
+        const response = await fetch(`https://social-media-server-6joo.onrender.com/posts`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        });
+        const posts = await response.json();
+        dispatch(setPosts({ posts }));
+        setImage(null);
+        setPost("");
+      }catch(err){
+        setIsFetching(false);
       }
-  
-      const response = await fetch(`https://social-media-server-6joo.onrender.com/posts`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
-      const posts = await response.json();
-      dispatch(setPosts({ posts }));
-      setImage(null);
-      setPost("");
+      setIsFetching(false);
     };
   
     return (
@@ -167,7 +174,7 @@ import {
           )}
   
           <Button
-            disabled={!post}
+            disabled={!post || isFetching}
             onClick={handlePost}
             sx={{
               color: palette.background.alt,
