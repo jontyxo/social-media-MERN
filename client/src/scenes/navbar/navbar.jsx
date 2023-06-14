@@ -57,7 +57,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          Ranger's Den
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween

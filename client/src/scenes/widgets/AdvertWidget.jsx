@@ -24,12 +24,11 @@ const AdvertWidget = () => {
         style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
       />
       <FlexBetween>
-        <Typography color={main}>MikaCosmetics</Typography>
-        <Typography color={medium}>mikacosmetics.com</Typography>
+        <Typography color={main}>Lord Rings</Typography>
+        <Typography color={medium}>lordrings.com</Typography>
       </FlexBetween>
       <Typography color={medium} m="0.5rem 0">
-        Your pathway to stunning and immaculate beauty and made sure your skin
-        is exfoliating skin and shining like light.
+      Welcome to Lord Rings, where the enchantment of literature unfolds before your eyes. Step into a world of mythical wonders and embark on epic journeys crafted by the greatest literary minds.
       </Typography>
     </WidgetWrapper>
   );

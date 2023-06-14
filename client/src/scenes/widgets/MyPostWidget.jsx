@@ -91,43 +91,10 @@ import {
             border={`1px solid ${medium}`}
             borderRadius="5px"
             mt="1rem"
+            sx={{ "&:hover": { cursor: "pointer" } }}
             p="1rem"
           >
-            {/* <Dropzone
-              acceptedFiles=".jpg,.jpeg,.png"
-              multiple={false}
-              onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
-            >
-              {({ getRootProps, getInputProps }) => (
-                <FlexBetween>
-                  <Box
-                    {...getRootProps()}
-                    border={`2px dashed ${palette.primary.main}`}
-                    p="1rem"
-                    width="100%"
-                    sx={{ "&:hover": { cursor: "pointer" } }}
-                  >
-                    <input {...getInputProps()} />
-                    {!image ? (
-                      <p>Add Image Here</p>
-                    ) : (
-                      <FlexBetween>
-                        <Typography>{image.name}</Typography>
-                        <EditOutlined />
-                      </FlexBetween>
-                    )}
-                  </Box>
-                  {image && (
-                    <IconButton
-                      onClick={() => setImage(null)}
-                      sx={{ width: "15%" }}
-                    >
-                      <DeleteOutlined />
-                    </IconButton>
-                  )}
-                </FlexBetween>
-              )}
-            </Dropzone> */}
+        
             <label htmlFor="fileInput">
           ADD Image here
           </label>
