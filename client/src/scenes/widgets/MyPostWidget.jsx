@@ -64,6 +64,7 @@ import ClipLoader from "react-spinners/ClipLoader";
         const posts = await response.json();
         dispatch(setPosts({ posts }));
         setImage(null);
+        setFile("");
         setPost("");
       }catch(err){
         setIsFetching(false);
