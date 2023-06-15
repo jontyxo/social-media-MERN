@@ -42,7 +42,6 @@ console.log(isServerRunning)
 <CssBaseline />
       <Routes>
         <Route path="/" element={isAuth?<Navigate to="/home"/>:<LoginPage />}/>
-        {console.log(isAuth)}
         <Route path="/home" element={isAuth ?<Homepage />:<Navigate to="/"/>}/>
         <Route path="profile/:userId" element={isAuth ?<ProfilePage />:<Navigate to="/"/>}/>
       </Routes>

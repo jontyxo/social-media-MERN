@@ -88,20 +88,30 @@ import {
         </FlexBetween>
         {isImage && (
           <Box
-            border={`1px solid ${medium}`}
-            borderRadius="5px"
-            mt="1rem"
-            sx={{ "&:hover": { cursor: "pointer" } }}
-            p="1rem"
-          >
-        
-            <label htmlFor="fileInput">
-          ADD Image here
+                  gridColumn="span 4"
+                  border={`1px solid ${palette.neutral.medium}`}
+                  borderRadius="5px"
+                  p="1rem"
+                  m="0.5rem"
+                >
+             
+                  <label htmlFor="fileInput">
+                  <Box
+                        
+                        border={`2px dashed ${palette.primary.main}`}
+                        p="1rem"
+                        sx={{ "&:hover": { cursor: "pointer" } }}
+                      >
+                     
+                      {file ? <p>{file.name}</p>:<p>Add Image Here</p>} 
+                          
+                      </Box>
+       
           </label>
                   <input id="fileInput" type="file" style={{ display: "none" }} 
             onChange={(e)=>setFile(e.target.files[0])}
           />
-          </Box>
+                </Box>
         )}
   
         <Divider sx={{ margin: "1.25rem 0" }} />
