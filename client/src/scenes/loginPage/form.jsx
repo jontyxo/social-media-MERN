@@ -213,12 +213,12 @@ const Form = () => {
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
                      
-                      {file ? <p>{file.name}</p>:<p>Add Image Here</p>} 
+                      {file ? <p>{file.name}</p>:<span style={{ color: "red" }}>Add Image Here (Required)</span>} 
                           
                       </Box>
        
           </label>
-                  <input id="fileInput" type="file" style={{ display: "none" }} 
+                  <input id="fileInput" type="file" style={{ display: "none" }} required={true} 
             onChange={(e)=>setFile(e.target.files[0])}
           />
                 </Box>
