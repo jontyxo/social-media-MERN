@@ -8,14 +8,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import ClipLoader from "react-spinners/ClipLoader";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
-import Dropzone from "react-dropzone";
-import FlexBetween from "../../components/FlexBetween";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -57,40 +55,6 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  // const register = async (values, onSubmitProps) => {
-  //   const formData = new FormData();
-  //   // this allows us to send form info with image
-  //   const cloudinaryUpload = await axios.post(
-  //     "https://api.cloudinary.com/v1_1/dvjc0fusx/image/upload",
-  //     file,
-  //     {
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     }
-  //   );
-  //   const pictureId = cloudinaryUpload.data.public_id;
-  
-  //   for (let value in values) {
-  //     if (value === "picture") {
-  //       formData.append("picturePath", pictureId);
-  //     } else {
-  //       formData.append(value, values[value]);
-  //     }
-  //   }
-
-  //   const savedUserResponse = await fetch(
-  //     "http://localhost:5000/auth/register",
-  //     {
-  //       method: "POST",
-  //       body: formData,
-  //     }
-  //   );
-  //   const savedUser = await savedUserResponse.json();
-  //   onSubmitProps.resetForm();
-
-  //   if (savedUser) {
-  //     setPageType("login");
-  //   }
-  // };
 
   const register=async(values,onSubmitProps) =>{
     setIsFetching(true);
@@ -299,7 +263,18 @@ const Form = () => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              {isLogin ? "LOGIN" : "REGISTER"}
+              {isFetching ? (
+                <ClipLoader
+        color="white"
+        loading={isFetching}
+        
+        size={15}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+        ) : (
+          isLogin ? 'LOGIN' : 'REGISTER'
+        )}
             </Button>
             <Typography
               onClick={() => {

@@ -17,6 +17,7 @@ import {
     IconButton,
     useMediaQuery,
   } from "@mui/material";
+import ClipLoader from "react-spinners/ClipLoader";
   import FlexBetween from "../../components/FlexBetween";
   import UserImage from "../../components/UserImage";
   import WidgetWrapper from "../../components/WidgetWrapper";
@@ -97,7 +98,6 @@ import {
              
                   <label htmlFor="fileInput">
                   <Box
-                        
                         border={`2px dashed ${palette.primary.main}`}
                         p="1rem"
                         sx={{ "&:hover": { cursor: "pointer" } }}
@@ -158,8 +158,19 @@ import {
               backgroundColor: palette.primary.main,
               borderRadius: "3rem",
             }}
-          >
-            POST
+          >{
+            isFetching ? (
+              <ClipLoader
+        color="white"
+        loading={isFetching}
+        
+        size={15}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+            ):'POST'
+          }
+            
           </Button>
         </FlexBetween>
       </WidgetWrapper>
